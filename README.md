@@ -51,13 +51,13 @@ npm install -g aws-cdk
 cdk --version
 ```
 
-Create dir cdk-app/, changing name will cause an error
+__Create dir cdk-app/__, changing name will cause an error
 ```bash
 mkdir cdk-app
 cd cdk-app/
 ```
 
-__Initialize the application
+__Initialize the application__
 ```bash
 cdk init app --language javascript
 ```
@@ -78,7 +78,7 @@ __Add layer for aws-sdk__
   "layerArn": "arn:aws:lambda:eu-central-1:[ACCOUND_IID]:layer:nodesdk:1",
   "watch": {
     "include": [
-      "
+...
 ```
 
 __Update cdk-app-stack.js__
