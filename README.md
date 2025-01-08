@@ -6,21 +6,26 @@ AWS CDK project to detect labels (e.g., objects, events, and concepts) uploaded 
 ## **Architecture**
 The solution is fully implemented as **Infrastructure as Code (IaC)** using AWS CDK. 
 
- ![S3 Bucket](./icons/s3.png)
+ ![S3 Bucket](./icons/s3.png) 
+ ![AWS Lambda](./icons/lambda.png) 
+ ![Amazon DynamoDB Table](./icons/ddb.png)
+ ![Amazon Rekognition](./icons/rkg.png)
+
+ **S3 Bucket**
    - Acts as the input storage for images.
    - Triggers a Lambda function whenever a new image is uploaded.
 
-  ! [AWS Lambda] (./icons/lambda.png)
+  ![AWS Lambda](./icons/lambda.png) **Lambda**
    - Processes S3 events.
    - Uses the Rekognition  [`detectFaces`](https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectFaces.html) API to do facial image analysis.
    - Stores the detected labels in DynamoDB.
 
- ![Amazon DynamoDB Table](./icons/ddb.png)
-
+ 
+**Amazon DynamoDB Table**
    - Stores metadata about the images and the labels detected by Rekognition.
    - Partition key: `Image` (name of the image).
 
- ![Amazon Rekognition](./icons/rkg.png)
+**Amazon Rekognition**
 - Stateless  API operation`detectFaces` for facial analysis identifies several facial attributes, including:
   - **Age Range**: Estimates the age range of individuals in the image.
   - **Emotions**: Detects emotions like happiness, sadness, surprise, etc. with confidence value
@@ -109,7 +114,6 @@ __Update cdk-app-stack.js__
 cd .. to dir with cdk.json 
 run cdk bootstrap
 ```
-In terminal you should be ->  
 ![✅  Environment aws://account_id/eu-region-1 bootstrapped.](./assets/cdkBootstrapScreen.png)
 __Optionally generate the CF template of of the stack__
 ```bash
