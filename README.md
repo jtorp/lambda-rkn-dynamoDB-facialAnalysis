@@ -1,14 +1,13 @@
 # Analyzing Images Stored in an Amazon S3 Bucket
  
  AWS CDK project uses AWS Lambda, Amazon Rekognition, and Amazon DynamoDB to detect faces in images uploaded to S3 bucket. The results, including facial attributes, are stored in a DynamoDB table.
----
+
+
+## **Architecture**
 ![S3 Bucket](./icons/s3.png)
 ![AWS Lambda](./icons/lambda.png)
 ![Amazon DynamoDB Table](./icons/ddb.png)
 ![Amazon Rekognition](./icons/rkg.png)
----
-
-## **Architecture**
 
 This solution is built as **Infrastructure as Code (IaC)** using AWS CDK, to define and manage AWS resources programmatically.
 
@@ -44,10 +43,11 @@ This solution is built as **Infrastructure as Code (IaC)** using AWS CDK, to def
   ```
   - **Smile**: Identifies if the person is smiling.
 
+
+
 ## **IaC**
 
 ```bash
-
 cdk-app/
 ├── lambda/
 │   ├── index.mjs #Lambda function for image analysis
@@ -66,6 +66,7 @@ cdk-app/
 ```
 
 ## Setting Up 
+
 
 **Install AWS CDK**
 ```bash
@@ -101,8 +102,8 @@ touch index.mjs
 ```
 
 **Add layer for aws-sdk**
-Lambda layer should be in the same region where you are synthesizing and deploying the CDK stack.
 
+Lambda layer should be in the same region where you are synthesizing and deploying the CDK stack.
 Retrieve the context value from the cdk.json file.
 
 - Add the ARN to cdk.json file under the `context` section, like this:
@@ -127,7 +128,9 @@ run cdk bootstrap
 
 
 **Optionally Generate the CloudFormation Template**
-To inspect the CloudFormation template, run:
+
+
+To inspect the CloudFormation template:
 
 ```bash
 cdk synth
@@ -145,10 +148,7 @@ cdk deploy
 
 **Cleaning Up**
 
-To delete the deployed stack and resources:
-
-Empty the S3 bucket to avoid additional charges.
-Run:
+To delete the deployed stack and resources first **empty the S3 bucket** ⚠️
 
 ```bash
 cdk destroy
