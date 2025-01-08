@@ -17,15 +17,12 @@ class CdkAppStack extends Stack {
     super(scope, id, props);
 
     // S3 Bucket
-    // ========================================
     const bucket = new s3.Bucket(this, imageBucketName, {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
     new cdk.CfnOutput(this, "BucketName", { value: bucket.bucketName });
 
-    // IAM Role for Lambda
-    // ========================================
     const role = new iam.Role(this, "cdk-rekn-lambda-role", {
       assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
     });
@@ -44,7 +41,6 @@ class CdkAppStack extends Stack {
     );
 
     // DynamoDB Table
-    // ========================================
     const table = new dynamodb.Table(this, "cdk-rekn-imagetable", {
       partitionKey: { name: "Image", type: dynamodb.AttributeType.STRING },
       removalPolicy: cdk.RemovalPolicy.DESTROY,
@@ -65,7 +61,6 @@ class CdkAppStack extends Stack {
     );
 
     // AWS Lambda Function
-    // ========================================
     const lambdaFn = new lambda.Function(this, "cdk-rekn-lambda-function", {
       code: lambda.Code.fromAsset("lambda"),
       runtime: lambda.Runtime.NODEJS_20_X,
@@ -85,7 +80,6 @@ class CdkAppStack extends Stack {
       })
     );
 
-    // Permissions to read from S3 bucket & write to DDB
     bucket.grantReadWrite(lambdaFn);
     table.grantFullAccess(lambdaFn);
   }

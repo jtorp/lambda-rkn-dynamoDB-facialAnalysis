@@ -1,6 +1,6 @@
 # Analyzing Images Stored in an Amazon S3 Bucket
  
- AWS CDK project uses AWS Lambda, Amazon Rekognition, and Amazon DynamoDB to detect faces in images uploaded to S3 bucket. The results, including facial attributes, are stored in a DynamoDB table.
+ AWS CDK project uses AWS Lambda, Rekognition, and DynamoDB to detect faces in images uploaded to S3 bucket. The results, including facial attributes, are stored in a DynamoDB table.
 
 
 ## **Architecture**
