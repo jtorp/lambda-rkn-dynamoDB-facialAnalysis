@@ -1,4 +1,4 @@
-# Analyzing Images Stored in an Amazon S3 Bucket
+# Analyzing Images, using S3, Rekognition, Lambda, and DynamoDB
  Sample project for an event-driven architecture that updates DynamoDB to detect faces and analyse images uploaded to S3 bucket. It's implemented using AWS CDK and utilizes Lambda for processing and Rekognition for AI-powered image analysis.
 
 
