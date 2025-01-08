@@ -1,14 +1,17 @@
 # Analyzing Images Stored in an Amazon S3 Bucket
-
-AWS CDK project to detect labels (e.g., objects, events, and concepts) uploaded to an Amazon **S3** bucket . Using **Rekognition** and storing results in a **DynamoDB** table.
+ 
+ AWS CDK project uses AWS Lambda, Amazon Rekognition, and Amazon DynamoDB to detect faces in images uploaded to S3 bucket. The results, including facial attributes, are stored in a DynamoDB table.
+---
 ![S3 Bucket](./icons/s3.png)
 ![AWS Lambda](./icons/lambda.png)
 ![Amazon DynamoDB Table](./icons/ddb.png)
 ![Amazon Rekognition](./icons/rkg.png)
+---
 
 ## **Architecture**
 
-The solution is fully implemented as **Infrastructure as Code (IaC)** using AWS CDK.
+This solution is built as **Infrastructure as Code (IaC)** using AWS CDK, to define and manage AWS resources programmatically.
+
 
 **S3 Bucket**
 
@@ -43,7 +46,7 @@ The solution is fully implemented as **Infrastructure as Code (IaC)** using AWS 
 
 ## **IaC**
 
-```bash .
+```bash
 
 cdk-app/
 ├── lambda/
@@ -62,13 +65,15 @@ cdk-app/
 
 ```
 
-## Init the project
+## Setting Up 
 
+**Install AWS CDK**
 ```bash
 npm install -g aws-cdk@latest
 #or
 npm install -g aws-cdk
 ```
+**Verify Installation**
 
 ```bash
 cdk --version
@@ -87,9 +92,7 @@ cd cdk-app/
 cdk init app --language javascript
 ```
 
-Create Directory for Lambda
-
-- Lambda layer should be in the same region where you are synthesizing and deploying the CDK stack.
+**Create Lambda Directory**
 
 ```bash
 mkdir lambda
@@ -98,7 +101,7 @@ touch index.mjs
 ```
 
 **Add layer for aws-sdk**
-To use the lambdaLayerArn from the cdk.json context, you need to retrieve it in your cdk-app-stack.js file. Here's how you can do it:
+Lambda layer should be in the same region where you are synthesizing and deploying the CDK stack.
 
 Retrieve the context value from the cdk.json file.
 
@@ -116,20 +119,19 @@ Retrieve the context value from the cdk.json file.
 **Update cdk-app-stack.js**
 
 ```bash
-cd .. to dir with cdk.json
+cd .. # to the dir with cdk.json
 run cdk bootstrap
 ```
 
-![✅  Environment aws://account_id/eu-region-1 bootstrapped.](./assets/cdkBootstrapScreen.png)
-**Optionally generate the CF template of of the stack**
+![✅  Screenshot of successful bootstrap](./assets/cdkBootstrapScreen.png)
+
+
+**Optionally Generate the CloudFormation Template**
+To inspect the CloudFormation template, run:
 
 ```bash
 cdk synth
-```
-
-To save tempalte in current cdk-app dir
-
-```bash
+# Or save the template to a file
 cdk synth > template.yaml
 ```
 
@@ -139,11 +141,14 @@ cdk synth > template.yaml
 cdk deploy
 ```
 
-![✨ CdkAppStack Deployed ](./assets/cdkDeployScreen.png)
+![✨ Screenshot of successful deployment](./assets/cdkDeployScreen.png)
 
-**To destroy the stack**
+**Cleaning Up**
 
-- Empty the s3
+To delete the deployed stack and resources:
+
+Empty the S3 bucket to avoid additional charges.
+Run:
 
 ```bash
 cdk destroy
